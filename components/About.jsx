@@ -64,8 +64,8 @@ export default function About() {
                 src="/about-facility.jpg"
                 alt="Nilkanth Industries Facility"
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
                 className="object-cover object-center"
-                priority
               />
             </div>
 

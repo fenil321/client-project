@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import RollingQuoteButton from "./RollingQuoteButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Header Action */}
+        {/* Header Action
         <div className="hidden md:flex items-center">
           <a
             href="#contact"
@@ -58,6 +59,10 @@ export default function Navbar() {
             Get a Quote
             <ArrowRight className="w-4 h-4" />
           </a>
+        </div> */}
+        {/* Desktop Header Action */}
+        <div className="hidden md:flex items-center">
+          <RollingQuoteButton href="#contact" text="Get a Quote" />
         </div>
 
         {/* Mobile Hamburger */}
