@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Preloader from "@/components/Preloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="bg-industrial-950 text-slate-200 antialiased selection:bg-amber-500 selection:text-black">
+        <Preloader />
         {children}
       </body>
     </html>

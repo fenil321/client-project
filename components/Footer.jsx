@@ -90,7 +90,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-amber-500 shrink-0" />
-                Mangrol, Surat — 394110
+                Kim, Surat — 394110
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-500 shrink-0" />
