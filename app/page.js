@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import Clients from "@/components/Clients";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/Galary";
@@ -20,6 +21,7 @@ export default function Home() {
       <Process />
       <Industries />
       <Gallery />
+      {/* <Clients /> */}
       <Contact />
       <Footer />
     </main>

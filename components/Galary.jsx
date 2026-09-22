@@ -9,24 +9,34 @@ export default function Gallery() {
 
   const items = [
     {
-      title: "Coloured anodized aerospace components",
-      tag: "Aerospace",
-      image: "/gallery-1.jpg",
+      title: "Hard Anodized Extrusion Profiles",
+      description:
+        "Type-III hard anodized extrusion bars with extreme wear resistance for sliding rail applications.",
+      image: "/hard-anoide.png",
     },
     {
-      title: "Polished silver anodized tubes",
-      tag: "Architectural",
-      image: "/gallery-2.jpg",
+      title: "Anodized Motor Housing Batch",
+      description:
+        "Batch-finished motor housing components in silver anodizing ready for OEM assembly lines.",
+      image: "/anodized-motor-batch.png",
     },
     {
-      title: "Anodizing electrolyte tank process",
-      tag: "Facility",
-      image: "/gallery-3.jpg",
+      title: "Hard Anodized Long Extrusion Bar",
+      description:
+        "Extended aluminum extrusion with thick hard anodized oxide layer for heavy-duty structural use.",
+      image: "/bar.png",
     },
     {
-      title: "Quality inspection with micrometer",
-      tag: "QA / Lab",
-      image: "/gallery-4.jpg",
+      title: "Black Anodized Mounting Plate",
+      description:
+        "Precision-drilled aluminum panel with deep matte black anodized finish for industrial assemblies.",
+      image: "/black-plate.png",
+    },
+    {
+      title: "Silver Anodized Housings & Gears",
+      description:
+        "Clear anodized machined housings and gears preserving natural aluminum luster with added hardness.",
+      image: "/silver.png",
     },
   ];
 
@@ -90,27 +100,26 @@ export default function Gallery() {
           {items.map((item, i) => (
             <figure
               key={i}
-              className="group relative rounded-2xl h-80 overflow-hidden bg-slate-100 flex flex-col justify-end p-6 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex-none w-[80vw] sm:w-auto snap-center sm:snap-align-none"
+              className="group relative rounded-2xl overflow-hidden bg-white border border-slate-100 hover:border-slate-200 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all duration-300 flex flex-col flex-none w-[80vw] sm:w-auto snap-center sm:snap-align-none"
             >
-              {/* Background Next.js Image */}
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              />
+              {/* Upper Image Frame */}
+              <div className="relative w-full h-56 sm:h-60 bg-slate-50/70 overflow-hidden flex items-center justify-center">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-opacity" />
-
-              {/* Text Content */}
-              <div className="relative z-20">
-                <span className="px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[10px] uppercase font-bold tracking-wider mb-2 inline-block">
-                  {item.tag}
-                </span>
-                <p className="text-white text-sm font-semibold leading-snug">
+              {/* Lower Text Content Area */}
+              <div className="p-5 sm:p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-slate-900 font-bold text-md sm:text-[15px] leading-snug mb-2 justify-center">
                   {item.title}
+                </h3>
+                <p className="text-slate-500 text-s sm:text-[14px] leading-relaxed">
+                  {item.description}
                 </p>
               </div>
             </figure>
