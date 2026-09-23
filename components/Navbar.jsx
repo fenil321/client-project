@@ -20,27 +20,33 @@ export default function Navbar() {
 
   const handleScroll = (e, href) => {
     e.preventDefault();
+
+    // 1. Initiate closing the mobile menu
     setIsOpen(false);
 
-    if (href === "#top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
+    // 2. Wait 150ms for mobile touch gesture & drawer animation to detach
+    setTimeout(() => {
+      if (href === "#top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
 
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
+      const targetId = href.replace("#", "");
+      const targetElement = document.getElementById(targetId);
 
-    if (targetElement) {
-      const navOffset = 80; // Height of the fixed navbar (h-20 = 80px)
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - navOffset;
+      if (targetElement) {
+        const navHeight = 80; // 80px fixed header height (h-20)
+        const elementTop = targetElement.getBoundingClientRect().top;
+        const currentScrollY =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = elementTop + currentScrollY - navHeight;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 150);
   };
 
   return (
