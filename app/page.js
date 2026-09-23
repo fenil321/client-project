@@ -21,7 +21,7 @@ export default function Home() {
       <Process />
       <Industries />
       <Gallery />
-      {/* <Clients /> */}
+      <Clients />
       <Contact />
       <Footer />
     </main>
