@@ -24,7 +24,7 @@ export default function Gallery() {
       title: "Hard Anodized Long Extrusion Bar",
       description:
         "Extended aluminum extrusion with thick hard anodized oxide layer for heavy-duty structural use.",
-      image: "/bar.png",
+      image: "/Bar.png",
     },
     {
       title: "Black Anodized Mounting Plate",
