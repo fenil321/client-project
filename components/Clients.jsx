@@ -135,7 +135,7 @@ export default function Clients() {
     },
     {
       name: "Shree Shyam Enterprises",
-      logo: "", // Leave empty if no logo exists yet
+      logo: "/shree-shyam.jpeg", // Leave empty if no logo exists yet
       category: "Precision Machining",
     },
     {
@@ -275,7 +275,7 @@ function ClientItemDisplay({ client, isMarquee = false }) {
           alt={client.name}
           fill
           sizes="160px"
-          className="object-contain filter  transition-all duration-300"
+          className="object-contain filter rounded transition-all duration-300"
           onError={() => setImageError(true)}
         />
       </div>
