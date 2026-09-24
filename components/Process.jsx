@@ -92,7 +92,11 @@ export default function Process() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 1.5, ease: [0.65, 0, 0.35, 1], delay: 0.2 }}
+              transition={{
+                duration: 1.5,
+                ease: [0.65, 0, 0.35, 1],
+                delay: 0.2,
+              }}
               className="h-full w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 origin-left"
             />
           </div>
@@ -132,7 +136,11 @@ export default function Process() {
                     {isSelected && (
                       <motion.div
                         layoutId="activeGlow"
-                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 25,
+                        }}
                         className="absolute -inset-2 rounded-full bg-amber-500/20 blur-sm pointer-events-none"
                       />
                     )}
@@ -140,7 +148,11 @@ export default function Process() {
                     <motion.div
                       whileHover={{ scale: 1.12 }}
                       whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 17,
+                      }}
                       className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center font-bold text-sm tracking-wider transition-all duration-300 border-2 ${
                         isSelected
                           ? "bg-amber-500 text-black border-amber-500 shadow-lg shadow-amber-500/30"

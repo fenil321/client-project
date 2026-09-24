@@ -1,7 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, MapPin, Mail, Send, CheckCircle2 } from "lucide-react";
+import {
+  Phone,
+  MapPin,
+  Mail,
+  Send,
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,13 +21,89 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  // 1. ADDED: Loading and error feedback states
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  // Email format regex
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+  };
+
+  // Restrict phone input to digits only & max 10 characters
+  const handlePhoneChange = (e) => {
+    const onlyDigits = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    if (onlyDigits.length <= 10) {
+      setFormData((prev) => ({ ...prev, phone: onlyDigits }));
+    }
+  };
+
+  // 2. UPDATED: Real API call to your /api/contact route
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Connect to your email backend (Resend, Nodemailer, or Supabase)
-    console.log("Form data:", formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setErrorMessage("");
+
+    // --- Client-side Validations ---
+    if (formData.name.trim().length < 2) {
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+
+    if (formData.phone.length !== 10) {
+      setErrorMessage("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      setErrorMessage(
+        "Please enter a valid email address (e.g. name@company.com).",
+      );
+      return;
+    }
+
+    if (!formData.service) {
+      setErrorMessage("Please select a required coating service.");
+      return;
+    }
+
+    if (formData.message.trim().length < 10) {
+      setErrorMessage(
+        "Please provide component details (minimum 10 characters).",
+      );
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to dispatch email");
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        service: "",
+        message: "",
+      });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      setErrorMessage(
+        err.message || "Failed to send message. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -101,10 +185,10 @@ export default function Contact() {
                     Email
                   </div>
                   <a
-                    href="mailto:info@nilkanthindustries.in"
+                    href="mailto:nilkanthindustry24@gmail.com"
                     className="text-white text-sm font-medium mt-1 hover:text-amber-400 block"
                   >
-                    info@nilkanthindustries.in
+                    nilkanthindustry24@gmail.com
                   </a>
                 </div>
               </li>
@@ -133,6 +217,14 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* 3. ADDED: Error message banner if API fails */}
+                {errorMessage && (
+                  <div className="p-3 rounded-lg bg-red-950/60 border border-red-800 text-red-300 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
                     Your Name
@@ -154,16 +246,36 @@ export default function Contact() {
                     <label className="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
                       Phone Number
                     </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 ..."
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      className="w-full px-4 py-2.5 rounded-md bg-industrial-900 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500"
-                    />
+
+                    <div className="relative flex items-center">
+                      {/* Locked +91 Prefix & Divider */}
+                      <div className="absolute left-0 inset-y-0 pl-3.5 flex items-center pointer-events-none select-none">
+                        <span className="text-slate-400 font-medium text-sm">
+                          +91
+                        </span>
+                        <span className="h-4 w-[1px] bg-slate-700 ml-2.5" />
+                      </div>
+
+                      {/* Phone Input */}
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        required
+                        placeholder="Your Number"
+                        value={formData.phone}
+                        onChange={(e) => {
+                          // Strip non-digits and prevent leading '0'
+                          let val = e.target.value.replace(/\D/g, "");
+                          if (val.startsWith("0")) val = val.slice(1);
+
+                          if (val.length <= 10) {
+                            setFormData({ ...formData, phone: val });
+                          }
+                        }}
+                        className="w-full pl-14 pr-4 py-2.5 rounded-md bg-industrial-900 border border-slate-800 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-amber-500 transition-colors tracking-wide"
+                      />
+                    </div>
                   </div>
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
@@ -191,7 +303,7 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, service: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 rounded-md bg-industrial-900 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-500"
+                    className="w-full px-4 py-2.5 rounded-md bg-industrial-900 border border-slate-800 text-white text-sm focus:outline-none focus:border-amber-500 cursor-pointer"
                   >
                     <option value="" disabled hidden>
                       Select a Service...
@@ -224,12 +336,23 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* 4. UPDATED: Button shows loading spinner and disables during dispatch */}
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-md bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                  disabled={loading}
+                  className="w-full py-3 rounded-md bg-amber-500 hover:bg-amber-400 disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 cursor-pointer"
                 >
-                  <Send className="w-4 h-4" />
-                  Submit Feasibility Request
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Sending Request...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      Submit Feasibility Request
+                    </>
+                  )}
                 </button>
               </form>
             )}

@@ -94,7 +94,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                info@nilkanthindustries.in
+                nilkanthindustry24@gmail.com
               </li>
             </ul>
           </div>
