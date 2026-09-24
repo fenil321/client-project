@@ -115,9 +115,9 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Details */}
           <div>
-            <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase tracking-widest mb-3">
-              <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
-              Get in touch
+            <div className="inline-flex items-center gap-3 text-amber-500 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+              <span className="w-8 h-[1.5px] bg-amber-500" />
+              <span>Get in touch</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Let&apos;s discuss your finishing requirement.
