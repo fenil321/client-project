@@ -252,3 +252,10 @@ export async function POST(req) {
     );
   }
 }
+
+export async function GET() {
+  return NextResponse.json({
+    status:
+      "Nilkanth Contact API is active. Submit inquiries via POST request.",
+  });
+}
