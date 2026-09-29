@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { CheckCircle2, Layers, CookingPot } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle2, Layers, ArrowUpRight, CookingPot } from "lucide-react";
 
 export default function About() {
   const highlights = [
@@ -56,46 +57,44 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Column: Facility Image & Divisions */}
-          <div className="space-y-6">
-            {/* Facility Image */}
-            <div className="relative h-80 sm:h-[400px] w-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
-              <Image
-                src="/about-facility.jpg"
-                alt="Nilkanth Industries Facility"
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
-                className="object-cover object-center"
-              />
+          {/* Division Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-5 rounded-2xl bg-gray-50 border border-slate-400/80">
+              <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
+                <Layers className="w-4 h-4 text-amber-500" />
+              </div>
+              <div className="font-semibold text-black text-sm mb-1">
+                Industrial division
+              </div>
+              <p className="text-xs font-semibold text-slate-500 leading-relaxed">
+                Coating services for OEMs, fabricators, and component makers.
+              </p>
             </div>
 
-            {/* Division Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-gray-50 border border-slate-400/80">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
-                  <Layers className="w-4 h-4 text-amber-500" />
+            {/* Clickable VARSA Cookwell Card */}
+            <Link
+              href="/varsa-cookwell"
+              className="group p-5 rounded-2xl bg-gray-50 border border-slate-400/80 hover:border-amber-500 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/10 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 group-hover:bg-amber-500 text-amber-500 group-hover:text-black flex items-center justify-center transition-colors">
+                    <CookingPot className="w-4 h-4" />
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-amber-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                    Explore Lineup
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </span>
                 </div>
-                <div className="font-semibold text-black text-sm mb-1">
-                  Industrial division
-                </div>
-                <p className="text-xs font-semibold text-slate-500 leading-relaxed">
-                  Coating services for OEMs, fabricators, and component makers.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-gray-50 border border-slate-400/80">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
-                  <CookingPot className="w-4 h-4 text-amber-500" />
-                </div>
-                <div className="font-semibold text-black text-sm mb-1">
+                <div className="font-semibold text-black text-sm mb-1 group-hover:text-amber-600 transition-colors">
                   VARSA Cookwell
                 </div>
                 <p className="text-xs font-semibold text-slate-500 leading-relaxed">
-                  Our consumer brand — premium, durable utensils for everyday
-                  use.
+                  Our consumer brand — premium, durable hard-anodized utensils
+                  for everyday cooking.
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
