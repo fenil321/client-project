@@ -259,6 +259,7 @@ export default function Contact() {
                       {/* Phone Input */}
                       <input
                         type="tel"
+                        suppressHydrationWarning
                         inputMode="numeric"
                         maxLength={10}
                         required
@@ -340,6 +341,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
+                  suppressHydrationWarning
                   className="w-full py-3 rounded-md bg-amber-500 hover:bg-amber-400 disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 cursor-pointer"
                 >
                   {loading ? (

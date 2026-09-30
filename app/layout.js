@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
       <body className="bg-industrial-950 text-slate-200 antialiased selection:bg-amber-500 selection:text-black">
         <Preloader />
         {children}
